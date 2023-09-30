@@ -1,6 +1,5 @@
 import zmq
 from constants import *
-import string
 
 def server():
   context = zmq.Context()
@@ -9,9 +8,9 @@ def server():
 
   while True:
     message = socket.recv()               # wait for incoming message
-    if not b"STOP" in message:            # if not to stop...
+    if not "STOP" in str(message):        # if not to stop...
       print(f"received: {message}")
-      reply = message.decode()+'!'        # append "!" to message
+      reply = str(message.decode())+'!'   # append "!" to message
       socket.send(reply.encode())         # send it away (encoded)
     else:                         
       break                               # break out of loop and end

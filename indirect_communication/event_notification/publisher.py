@@ -13,25 +13,14 @@ def server():
   time.sleep(5)
   i = 0
   while True:
-    temp_data = json.dumps({                     # create JSON object with some fake sensor data
+    data = json.dumps({                     # create JSON object with some fake sensor data
       'seq': i,
       'id': 'sensor123',
-      'temp': random.randint(0,50),
+      'temp': random.randint(0,50)
     })
-    humid_data = json.dumps({                     # create JSON object with some fake sensor data
-      'seq': i,
-      'id': 'sensor124',
-      'humidity': random.randint(0,100),
-    })
-
-    message = TEMPTOPIC + temp_data                 # prefix with 'topic' on which subscribers can match
-    socket.send(message.encode())                 # publish the temp message
+    message = "TEMP " + data                # prefix with 'topic' on which subscribers can match
+    socket.send(message.encode())           # publish the message
     print(f"server: emit event: '{message}'")
-
-    message = HUMIDTOPIC + humid_data            # prefix with 'topic' on which subscribers can match
-    socket.send(message.encode())                 # publish the humid message
-    print(f"server: emit event: '{message}'")
-
     i += 1
     time.sleep(5)
 

@@ -7,8 +7,8 @@ import time
 
 if __name__ == "__main__":
   s  = Process(target=server)
-  c1 = Process(target=client)
-  c2 = Process(target=client)
+  c1 = Process(target=client, args=(HUMIDTOPIC,1))
+  c2 = Process(target=client, args=(TEMPTOPIC,2))
 
   s.start()
   c1.start()
